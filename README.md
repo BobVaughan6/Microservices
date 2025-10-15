@@ -19,29 +19,51 @@
    - 管理产品信息
    - 提供产品的 CRUD 操作
 
+📊 **详细架构图和通信流程请查看 [ARCHITECTURE.md](ARCHITECTURE.md)**
+
 ## 微服务核心特性
 
-### 1. 服务独立性
-- 每个服务都是独立的应用程序
-- 可以独立开发、部署和扩展
-- 使用各自的端口运行
+本项目演示了以下微服务架构的核心特性：
 
-### 2. API Gateway 模式
-- 统一的入口点
-- 请求路由
-- 服务聚合
+### 1. 服务独立性 (Service Independence)
+- ✅ 每个服务都是独立的应用程序
+- ✅ 可以独立开发、部署和扩展
+- ✅ 使用各自的端口运行（5000, 5001, 5002）
 
-### 3. 服务间通信
-- HTTP/REST API
-- 异步消息传递（可扩展）
+### 2. API Gateway 模式 (API Gateway Pattern)
+- ✅ 统一的入口点（Port 5000）
+- ✅ 请求路由到适当的后端服务
+- ✅ 服务健康状态聚合
 
-### 4. 健康检查
-- 每个服务提供 `/health` 端点
-- API Gateway 聚合所有服务的健康状态
+### 3. 服务间通信 (Inter-Service Communication)
+- ✅ HTTP/REST API 通信
+- ✅ 标准化的接口定义
+- ✅ JSON 数据交换格式
 
-### 5. 容器化
-- 每个服务都有独立的 Dockerfile
-- 使用 Docker Compose 进行编排
+### 4. 健康检查 (Health Checks)
+- ✅ 每个服务提供 `/health` 端点
+- ✅ API Gateway 聚合所有服务的健康状态
+- ✅ 便于监控和故障诊断
+
+### 5. 容器化 (Containerization)
+- ✅ 每个服务都有独立的 Dockerfile
+- ✅ 使用 Docker Compose 进行编排
+- ✅ 一键启动整个系统
+
+### 6. 单一职责原则 (Single Responsibility)
+- ✅ User Service 专注于用户管理
+- ✅ Product Service 专注于产品管理
+- ✅ API Gateway 专注于路由和聚合
+
+### 7. 松耦合 (Loose Coupling)
+- ✅ 服务之间通过标准 HTTP API 通信
+- ✅ 服务可以独立修改和部署
+- ✅ 每个服务维护自己的数据
+
+### 8. 可扩展性 (Scalability)
+- ✅ 每个服务可以独立扩展
+- ✅ 支持水平扩展
+- ✅ 使用 Docker 便于部署多个实例
 
 ## 技术栈
 
@@ -139,6 +161,8 @@ GET http://localhost:5002/api/products
 GET http://localhost:5002/api/products/{id}
 POST http://localhost:5002/api/products
 ```
+
+📖 **更多详细的 API 请求示例和测试场景请查看 [API_EXAMPLES.md](API_EXAMPLES.md)**
 
 ## 测试示例
 
