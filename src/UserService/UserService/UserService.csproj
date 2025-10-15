@@ -1,12 +1,80 @@
+<!-- =============================================================================
+     User Service - 项目文件 (Project File)
+     =============================================================================
+     作用：定义 .NET 项目的配置、依赖和构建设置
+     格式：MSBuild XML 格式
+     
+     SDK 说明：
+       - Microsoft.NET.Sdk.Web: 用于 ASP.NET Core Web 应用的 SDK
+       - 包含 Web 开发所需的所有基础设施和工具
+       - 自动引入 ASP.NET Core 运行时包
+     
+     项目文件的作用：
+       1. 定义目标框架版本
+       2. 管理 NuGet 包依赖
+       3. 配置编译选项
+       4. 定义项目输出类型
+     
+     未来可能添加的配置：
+       - 添加更多 NuGet 包（EF Core、Serilog、FluentValidation）
+       - 配置代码分析器（StyleCop、Roslynator）
+       - 添加项目引用（共享类库）
+       - 配置发布选项
+     ============================================================================= -->
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <!-- 项目属性配置 (Project Properties) -->
   <PropertyGroup>
+    <!-- TargetFramework: 目标 .NET 版本 -->
+    <!-- net9.0: .NET 9.0 是最新的 LTS（长期支持）版本 -->
+    <!-- 决定了可以使用的 API 和语言特性 -->
     <TargetFramework>net9.0</TargetFramework>
+    
+    <!-- Nullable: 启用可空引用类型 -->
+    <!-- enable: 编译器会警告可能的 null 引用错误 -->
+    <!-- 提高代码安全性，减少 NullReferenceException -->
+    <!-- C# 8.0+ 引入的特性，帮助在编译时发现 null 相关问题 -->
     <Nullable>enable</Nullable>
+    
+    <!-- ImplicitUsings: 启用隐式 using 指令 -->
+    <!-- enable: 自动引入常用命名空间，减少样板代码 -->
+    <!-- 例如：System、System.Linq、System.Collections.Generic 等 -->
+    <!-- 在 C# 10+ 和 .NET 6+ 可用 -->
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <!-- NuGet 包引用 (Package References) -->
+  <!-- ItemGroup: 定义一组项目项（包、文件等） -->
   <ItemGroup>
+    <!-- Microsoft.AspNetCore.OpenApi: OpenAPI/Swagger 支持 -->
+    <!-- 版本：9.0.9 -->
+    <!-- 作用：生成 OpenAPI 规范文档（/openapi/v1.json） -->
+    <!-- 用途：API 文档、客户端代码生成、测试工具集成 -->
+    <!-- 
+    未来可能添加的包：
+      Entity Framework Core（数据访问）：
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
+      
+      日志增强（结构化日志）：
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+      
+      数据验证：
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+      
+      JWT 认证：
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+      
+      Redis 缓存：
+        <PackageReference Include="StackExchange.Redis" Version="2.7.0" />
+      
+      健康检查扩展：
+        <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.0" />
+      
+      API 版本控制：
+        <PackageReference Include="Asp.Versioning.Mvc" Version="7.0.0" />
+    -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
   </ItemGroup>
 

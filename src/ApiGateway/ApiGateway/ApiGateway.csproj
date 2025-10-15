@@ -1,3 +1,14 @@
+<!-- =============================================================================
+     API Gateway - 项目文件 (Project File)
+     =============================================================================
+     作用：定义 .NET 项目的配置、依赖和构建设置
+     详细说明请参考 UserService.csproj
+     
+     API Gateway 特定的包扩展建议：
+       - Ocelot: 专业的 .NET API Gateway 库
+       - Polly: 弹性和瞬态故障处理（重试、熔断器）
+       - Microsoft.Extensions.Http.Polly: 集成 Polly 到 HttpClient
+     ============================================================================= -->
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
