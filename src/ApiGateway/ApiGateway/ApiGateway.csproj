@@ -4,6 +4,10 @@
      作用：定义 .NET 项目的配置、依赖和构建设置
      详细说明请参考 UserService.csproj
      
+     已集成的包：
+       ✅ Microsoft.AspNetCore.OpenApi: OpenAPI 规范生成
+       ✅ Scalar.AspNetCore: 现代化的 API 文档界面（替代 Swagger UI）
+     
      API Gateway 特定的包扩展建议：
        - Ocelot: 专业的 .NET API Gateway 库
        - Polly: 弹性和瞬态故障处理（重试、熔断器）
@@ -19,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.9.0" />
   </ItemGroup>
 
 </Project>

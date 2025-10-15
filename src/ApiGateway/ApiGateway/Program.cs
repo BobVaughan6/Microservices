@@ -19,14 +19,19 @@
 //   - 实现请求转换和响应聚合
 // =============================================================================
 
+// ========== 命名空间引用 ==========
+// 引入 Scalar UI 所需的命名空间，用于提供交互式 API 文档界面
+using Scalar.AspNetCore;
+
 // 创建 Web 应用程序构建器，用于配置服务和中间件
 var builder = WebApplication.CreateBuilder(args);
 
 // ========== 服务注册 (Dependency Injection) ==========
 // 将服务添加到依赖注入容器中，供整个应用程序使用
 
-// AddOpenApi(): 启用 OpenAPI 支持，用于生成 API 文档
-// 未来扩展：可以添加 Swagger UI 用于可视化 API 文档
+// AddOpenApi(): 启用 OpenAPI 支持，用于生成 API 文档 (OpenAPI Specification)
+// OpenAPI 是一个标准的 RESTful API 规范，用于描述 API 的结构
+// 生成的文档可以被各种工具使用（Swagger UI、Scalar、Postman 等）
 builder.Services.AddOpenApi();
 
 // AddHttpClient(): 注册 IHttpClientFactory，用于创建和管理 HttpClient 实例
@@ -40,10 +45,52 @@ var app = builder.Build();
 // ========== 配置 HTTP 请求管道 (Middleware Pipeline) ==========
 // 中间件按照添加的顺序执行，处理每个 HTTP 请求
 
-// 在开发环境中启用 OpenAPI 端点，方便调试和测试
+// ========== API 文档和交互式 UI 配置 ==========
+// 在开发环境中启用 OpenAPI 端点和 Scalar UI
+// Scalar 是一个现代化、美观的 API 文档和测试工具，相比 Swagger UI 更加优雅
+// 
+// 功能特性：
+//   1. 美观的现代化 UI 设计
+//   2. 交互式 API 测试（可直接在浏览器中调用 API）
+//   3. 支持深色模式
+//   4. 快速搜索和导航
+//   5. 代码生成（多种语言的客户端代码示例）
+//   6. 实时响应预览
+//   7. 请求历史记录
+// 
+// 访问地址：
+//   - OpenAPI 规范文档: http://localhost:5000/openapi/v1.json
+//   - Scalar UI 界面: http://localhost:5000/scalar/v1
+// 
+// 使用场景：
+//   1. API 开发和调试：实时测试 API 端点
+//   2. API 文档：自动生成的交互式文档
+//   3. 团队协作：分享 API 文档给前端开发者
+//   4. API 设计审查：可视化 API 结构
+// 
+// 生产环境建议：
+//   - 考虑是否需要在生产环境暴露 API 文档
+//   - 如果需要，可以添加认证保护
+//   - 或者使用环境变量控制是否启用
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi(); // 暴露 /openapi/v1.json 端点
+    // 暴露 OpenAPI 规范端点：/openapi/v1.json
+    // 该端点返回 API 的完整 OpenAPI 规范（JSON 格式）
+    app.MapOpenApi();
+    
+    // 添加 Scalar UI 中间件
+    // 提供一个交互式的 Web 界面来浏览和测试 API
+    // 参数说明：
+    //   - options.WithTitle(): 设置文档标题
+    //   - options.WithTheme(): 设置 UI 主题（ScalarTheme.Default, Mars, Moon, Purple, BluePlanet, Saturn, Kepler, DeepSpace）
+    //   - options.WithDefaultHttpClient(): 设置默认的 HTTP 客户端（ScalarTarget.CSharp, JavaScript, Python 等）
+    app.MapScalarApiReference(options =>
+    {
+        options
+            .WithTitle("API Gateway - 微服务网关")  // 设置页面标题
+            .WithTheme(ScalarTheme.Default)         // 使用默认主题（可选：Mars, Moon, Purple 等）
+            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient); // 默认显示 C# HttpClient 代码示例
+    });
 }
 
 // 从依赖注入容器获取 HttpClientFactory

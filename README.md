@@ -117,6 +117,36 @@ dotnet run
 docker-compose up --build
 ```
 
+## 📚 API 文档（Scalar UI）
+
+本项目集成了 **Scalar UI**，提供现代化的交互式 API 文档界面。
+
+### 访问方式
+
+启动服务后，在浏览器中打开：
+
+**🎯 Scalar UI 界面:** http://localhost:5000/scalar/v1
+
+**📄 OpenAPI 规范:** http://localhost:5000/openapi/v1.json
+
+### 功能特性
+
+- ✅ **美观的现代化 UI** - 比传统 Swagger UI 更优雅
+- ✅ **交互式测试** - 直接在浏览器中调用 API
+- ✅ **多语言代码示例** - 自动生成 C#、JavaScript、Python、cURL 等代码
+- ✅ **深色模式支持** - 舒适的阅读体验
+- ✅ **快速搜索** - 快速查找 API 端点
+- ✅ **实时响应预览** - 即时查看 API 返回结果
+
+### 使用步骤
+
+1. 启动所有服务（使用 `start-all.bat` 或 `start-all.sh`）
+2. 访问 http://localhost:5000/scalar/v1
+3. 浏览左侧的 API 端点列表
+4. 点击任意端点查看详情和测试
+
+📖 **详细的 Scalar UI 使用指南请查看 [SCALAR_UI.md](SCALAR_UI.md)**
+
 ## API 端点
 
 ### API Gateway (http://localhost:5000)
@@ -232,12 +262,20 @@ Microservices/
 2. **配置管理** - 使用配置中心（如 Consul、Azure App Configuration）
 3. **日志聚合** - 集成 ELK Stack 或 Seq
 4. **分布式追踪** - 添加 OpenTelemetry
-5. **API 文档** - 集成 Swagger/OpenAPI
+5. ~~**API 文档** - 集成 Swagger/OpenAPI~~ ✅ **已完成 - 使用 Scalar UI**
 6. **认证授权** - 实现 JWT 或 OAuth2
 7. **消息队列** - 添加 RabbitMQ 或 Kafka 用于异步通信
 8. **数据库** - 为每个服务添加独立的数据库
 9. **缓存** - 添加 Redis
 10. **负载均衡** - 使用 Nginx 或 Kubernetes Ingress
+
+## 相关文档
+
+- 📖 [系统架构](ARCHITECTURE.md) - 详细的架构图和通信流程
+- 📖 [API 示例](API_EXAMPLES.md) - 详细的 API 请求示例和测试场景
+- 📖 [Scalar UI 使用指南](SCALAR_UI.md) - API 文档界面使用说明
+- 📖 [Scalar 快速参考](SCALAR_QUICK_REFERENCE.md) - 快速参考卡片
+- 📋 [Scalar 更新日志](CHANGELOG_SCALAR.md) - Scalar UI 集成更新记录
 
 ## 许可证
 
