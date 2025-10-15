@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: ./src/UserService/UserService
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+    networks:
+      - microservices
+
+  product-service:
+    build:
+      context: ./src/ProductService/ProductService
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
+    networks:
+      - microservices
+
+  api-gateway:
+    build:
+      context: ./src/ApiGateway/ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    depends_on:
+      - user-service
+      - product-service
+    networks:
+      - microservices
+
+networks:
+  microservices:
+    driver: bridge
