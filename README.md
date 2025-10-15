@@ -57,7 +57,19 @@
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/download)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)（可选，用于容器化部署）
 
-### 本地运行（不使用 Docker）
+### 方法 1: 使用启动脚本（推荐）
+
+**Linux/MacOS:**
+```bash
+./start-all.sh
+```
+
+**Windows:**
+```bash
+start-all.bat
+```
+
+### 方法 2: 手动启动服务
 
 1. **启动 User Service**
 ```bash
@@ -77,7 +89,7 @@ cd src/ApiGateway/ApiGateway
 dotnet run
 ```
 
-### 使用 Docker Compose 运行
+### 方法 3: 使用 Docker Compose
 
 ```bash
 docker-compose up --build
@@ -130,7 +142,14 @@ POST http://localhost:5002/api/products
 
 ## 测试示例
 
-### 使用 curl
+### 使用测试脚本（推荐）
+
+```bash
+# 确保所有服务都在运行，然后执行
+./test-services.sh
+```
+
+### 手动测试 - 使用 curl
 
 ```bash
 # 通过 API Gateway 获取所有用户
@@ -143,7 +162,7 @@ curl http://localhost:5000/api/products
 curl http://localhost:5000/health
 ```
 
-### 使用 PowerShell
+### 手动测试 - 使用 PowerShell
 
 ```powershell
 # 获取所有用户
@@ -177,6 +196,9 @@ Microservices/
 │           ├── Dockerfile
 │           └── ...
 ├── docker-compose.yml       # Docker Compose 配置
+├── start-all.sh             # Linux/MacOS 启动脚本
+├── start-all.bat            # Windows 启动脚本
+├── test-services.sh         # 测试脚本
 └── README.md
 ```
 
