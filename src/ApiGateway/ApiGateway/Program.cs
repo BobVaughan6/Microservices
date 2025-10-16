@@ -88,7 +88,7 @@ if (app.Environment.IsDevelopment())
     {
         options
             .WithTitle("API Gateway - 微服务网关")  // 设置页面标题
-            .WithTheme(ScalarTheme.Default)         // 使用默认主题（可选：Mars, Moon, Purple 等）
+            .WithTheme(ScalarTheme.Mars)         // 使用默认主题（可选：Mars, Moon, Purple 等）
             .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient); // 默认显示 C# HttpClient 代码示例
     });
 }
