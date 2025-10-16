@@ -1,24 +1,30 @@
-# API Request Examples
+# API 请求示例
 
-This file contains example HTTP requests for testing the microservices system.
+本文件包含用于测试微服务系统的 HTTP 请求示例。
 
-## API Gateway Endpoints (Port 5000)
+------
 
-### Health Check
+## API 网关端点（端口 5000）
 
-```http
+### 健康检查
+
+```
 GET http://localhost:5000/health
 ```
 
-### User Endpoints
+------
 
-#### Get All Users
-```http
+### 用户接口（User Endpoints）
+
+#### 获取所有用户
+
+```
 GET http://localhost:5000/api/users
 ```
 
-Example Response:
-```json
+示例响应：
+
+```
 [
   {
     "id": 1,
@@ -38,13 +44,15 @@ Example Response:
 ]
 ```
 
-#### Get User by ID
-```http
+#### 根据 ID 获取用户
+
+```
 GET http://localhost:5000/api/users/1
 ```
 
-Example Response:
-```json
+示例响应：
+
+```
 {
   "id": 1,
   "name": "Alice",
@@ -52,75 +60,85 @@ Example Response:
 }
 ```
 
-### Product Endpoints
+------
 
-#### Get All Products
-```http
+### 产品接口（Product Endpoints）
+
+#### 获取所有产品
+
+```
 GET http://localhost:5000/api/products
 ```
 
-Example Response:
-```json
+示例响应：
+
+```
 [
   {
     "id": 1,
     "name": "Laptop",
-    "description": "High-performance laptop",
+    "description": "高性能笔记本电脑",
     "price": 999.99
   },
   {
     "id": 2,
     "name": "Mouse",
-    "description": "Wireless mouse",
+    "description": "无线鼠标",
     "price": 29.99
   },
   {
     "id": 3,
     "name": "Keyboard",
-    "description": "Mechanical keyboard",
+    "description": "机械键盘",
     "price": 89.99
   }
 ]
 ```
 
-#### Get Product by ID
-```http
+#### 根据 ID 获取产品
+
+```
 GET http://localhost:5000/api/products/2
 ```
 
-Example Response:
-```json
+示例响应：
+
+```
 {
   "id": 2,
   "name": "Mouse",
-  "description": "Wireless mouse",
+  "description": "无线鼠标",
   "price": 29.99
 }
 ```
 
----
+------
 
-## Direct Service Access (For Testing)
+## 直接访问服务（用于测试）
 
-### User Service (Port 5001)
+### 用户服务（端口 5001）
 
-#### Health Check
-```http
+#### 健康检查
+
+```
 GET http://localhost:5001/health
 ```
 
-#### Get All Users
-```http
+#### 获取所有用户
+
+```
 GET http://localhost:5001/api/users
 ```
 
-#### Get User by ID
-```http
+#### 根据 ID 获取用户
+
+```
 GET http://localhost:5001/api/users/1
 ```
 
-#### Create New User
-```http
+#### 创建新用户
+
+```
 POST http://localhost:5001/api/users
 Content-Type: application/json
 
@@ -131,75 +149,85 @@ Content-Type: application/json
 }
 ```
 
----
+------
 
-### Product Service (Port 5002)
+### 产品服务（端口 5002）
 
-#### Health Check
-```http
+#### 健康检查
+
+```
 GET http://localhost:5002/health
 ```
 
-#### Get All Products
-```http
+#### 获取所有产品
+
+```
 GET http://localhost:5002/api/products
 ```
 
-#### Get Product by ID
-```http
+#### 根据 ID 获取产品
+
+```
 GET http://localhost:5002/api/products/1
 ```
 
-#### Create New Product
-```http
+#### 创建新产品
+
+```
 POST http://localhost:5002/api/products
 Content-Type: application/json
 
 {
   "id": 0,
   "name": "Monitor",
-  "description": "4K Ultra HD Monitor",
+  "description": "4K 超高清显示器",
   "price": 499.99
 }
 ```
 
----
+------
 
-## Using curl
+## 使用 curl 测试
 
-### Basic GET Request
-```bash
+### 基础 GET 请求
+
+```
 curl http://localhost:5000/api/users
 ```
 
-### With Pretty Print (using jq)
-```bash
+### 美化输出（使用 jq）
+
+```
 curl -s http://localhost:5000/api/users | jq
 ```
 
-### With Python JSON Tool
-```bash
+### 使用 Python JSON 工具美化输出
+
+```
 curl -s http://localhost:5000/api/users | python3 -m json.tool
 ```
 
-### POST Request
-```bash
+### POST 请求示例
+
+```
 curl -X POST http://localhost:5001/api/users \
   -H "Content-Type: application/json" \
   -d '{"id":0,"name":"Eve","email":"eve@example.com"}'
 ```
 
----
+------
 
-## Using PowerShell
+## 使用 PowerShell 测试
 
-### GET Request
-```powershell
+### GET 请求
+
+```
 Invoke-RestMethod -Uri http://localhost:5000/api/users
 ```
 
-### POST Request
-```powershell
+### POST 请求
+
+```
 $user = @{
     id = 0
     name = "Eve"
@@ -212,32 +240,45 @@ Invoke-RestMethod -Uri http://localhost:5001/api/users `
     -ContentType "application/json"
 ```
 
----
+------
 
-## Testing Scenarios
+## 测试场景（Testing Scenarios）
 
-### Scenario 1: Verify System Health
-1. Check API Gateway health: `GET http://localhost:5000/health`
-2. Check User Service health: `GET http://localhost:5001/health`
-3. Check Product Service health: `GET http://localhost:5002/health`
+### 场景 1：验证系统健康状态
 
-### Scenario 2: API Gateway Routing
-1. Request users through Gateway: `GET http://localhost:5000/api/users`
-2. Request products through Gateway: `GET http://localhost:5000/api/products`
-3. Verify responses are correct
+1. 检查 API 网关健康状态：`GET http://localhost:5000/health`
+2. 检查用户服务健康状态：`GET http://localhost:5001/health`
+3. 检查产品服务健康状态：`GET http://localhost:5002/health`
 
-### Scenario 3: Service Independence
-1. Access User Service directly: `GET http://localhost:5001/api/users`
-2. Access Product Service directly: `GET http://localhost:5002/api/products`
-3. Verify both work independently
+------
 
-### Scenario 4: Error Handling
-1. Request non-existent user: `GET http://localhost:5000/api/users/999`
-2. Request non-existent product: `GET http://localhost:5000/api/products/999`
-3. Verify 404 responses
+### 场景 2：验证 API 网关路由
 
-### Scenario 5: Create Resources
-1. Create new user: `POST http://localhost:5001/api/users` with JSON body
-2. Retrieve the new user: `GET http://localhost:5001/api/users`
-3. Create new product: `POST http://localhost:5002/api/products` with JSON body
-4. Retrieve the new product: `GET http://localhost:5002/api/products`
+1. 通过网关请求用户列表：`GET http://localhost:5000/api/users`
+2. 通过网关请求产品列表：`GET http://localhost:5000/api/products`
+3. 验证返回结果是否正确
+
+------
+
+### 场景 3：验证服务独立性
+
+1. 直接访问用户服务：`GET http://localhost:5001/api/users`
+2. 直接访问产品服务：`GET http://localhost:5002/api/products`
+3. 验证两者能独立运行
+
+------
+
+### 场景 4：错误处理
+
+1. 请求不存在的用户：`GET http://localhost:5000/api/users/999`
+2. 请求不存在的产品：`GET http://localhost:5000/api/products/999`
+3. 验证返回 404 错误响应
+
+------
+
+### 场景 5：创建资源
+
+1. 创建新用户：`POST http://localhost:5001/api/users`（带 JSON 请求体）
+2. 获取新创建的用户：`GET http://localhost:5001/api/users`
+3. 创建新产品：`POST http://localhost:5002/api/products`（带 JSON 请求体）
+4. 获取新创建的产品：`GET http://localhost:5002/api/products`

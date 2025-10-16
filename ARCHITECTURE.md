@@ -1,4 +1,4 @@
-# Microservices Architecture Diagram
+# 微服务架构图
 
 ```
                                     ┌─────────────────────┐
@@ -37,50 +37,59 @@
      └─────────────────────────┘                    └─────────────────────────┘
 ```
 
-## Communication Flow
+1. ## 通信流程（Communication Flow）
 
-### 1. Client → API Gateway → User Service
-```
-Client Request: GET http://localhost:5000/api/users
-      ↓
-API Gateway routes to: http://localhost:5001/api/users
-      ↓
-User Service processes and returns user data
-      ↓
-API Gateway returns response to client
-```
+   ### 1. 客户端 → API 网关 → 用户服务
 
-### 2. Client → API Gateway → Product Service
-```
-Client Request: GET http://localhost:5000/api/products
-      ↓
-API Gateway routes to: http://localhost:5002/api/products
-      ↓
-Product Service processes and returns product data
-      ↓
-API Gateway returns response to client
-```
+   ```
+   客户端请求: GET http://localhost:5000/api/users
+         ↓
+   API 网关路由到: http://localhost:5001/api/users
+         ↓
+   用户服务处理并返回用户数据
+         ↓
+   API 网关将响应返回给客户端
+   ```
 
-### 3. Health Check Aggregation
-```
-Client Request: GET http://localhost:5000/health
-      ↓
-API Gateway checks: http://localhost:5001/health
-API Gateway checks: http://localhost:5002/health
-      ↓
-API Gateway aggregates all health statuses
-      ↓
-Returns overall system health to client
-```
+   ------
 
-## Key Microservices Characteristics Demonstrated
+   ### 2. 客户端 → API 网关 → 产品服务
 
-1. **Service Independence**: Each service runs independently on its own port
-2. **Single Responsibility**: Each service handles one domain (Users or Products)
-3. **API Gateway Pattern**: Centralized entry point for all client requests
-4. **Service Discovery**: Services are accessible at known endpoints
-5. **Health Monitoring**: Each service provides health status
-6. **Loose Coupling**: Services communicate via HTTP/REST APIs
-7. **Scalability**: Each service can be scaled independently
-8. **Containerization**: Each service has its own Dockerfile
-9. **Orchestration**: Docker Compose manages all services together
+   ```
+   客户端请求: GET http://localhost:5000/api/products
+         ↓
+   API 网关路由到: http://localhost:5002/api/products
+         ↓
+   产品服务处理并返回产品数据
+         ↓
+   API 网关将响应返回给客户端
+   ```
+
+   ------
+
+   ### 3. 健康检查聚合（Health Check Aggregation）
+
+   ```
+   客户端请求: GET http://localhost:5000/health
+         ↓
+   API 网关检查: http://localhost:5001/health
+   API 网关检查: http://localhost:5002/health
+         ↓
+   API 网关聚合所有健康状态
+         ↓
+   将整体系统健康状态返回给客户端
+   ```
+
+   ------
+
+   ## 微服务关键特性（Key Microservices Characteristics）
+
+   1. **服务独立性**：每个服务独立运行在自己的端口上
+   2. **单一职责原则**：每个服务只负责一个领域（用户或产品）
+   3. **API 网关模式**：所有客户端请求的统一入口
+   4. **服务发现机制**：服务通过已知端点进行访问
+   5. **健康监测**：每个服务都提供健康检查接口
+   6. **低耦合通信**：服务之间通过 HTTP/REST API 进行交互
+   7. **可扩展性**：每个服务可独立扩容部署
+   8. **容器化**：每个服务拥有独立的 Dockerfile
+   9. **编排管理**：通过 Docker Compose 统一管理多个服务
