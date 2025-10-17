@@ -16,6 +16,6 @@ public class HealthController : ControllerBase
     [HttpGet]
     public IActionResult Check()
     {
-        return Ok(new { status = "healthy", service = "UserService" });
+        return Ok(new { status = "健康", service = "UserService" });
     }
 }

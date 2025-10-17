@@ -13,9 +13,9 @@ public class ProductsController : ControllerBase
     // 内存存储（演示用）
     private static readonly List<Product> Products = new()
     {
-        new Product(1, "Laptop", "High-performance laptop", 999.99m),
-        new Product(2, "Mouse", "Wireless mouse", 29.99m),
-        new Product(3, "Keyboard", "Mechanical keyboard", 89.99m)
+        new Product(1, "笔记本电脑", "联想超级本", 8999m),
+        new Product(2, "鼠标", "罗技鼠标", 49.99m),
+        new Product(3, "键盘", "机械键盘", 299m)
     };
 
     /// <summary>

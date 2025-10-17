@@ -37,12 +37,12 @@ public class HealthController : ControllerBase
         // 返回聚合的健康状态
         return Ok(new
         {
-            status = userHealth && productHealth ? "healthy" : "degraded",
+            status = userHealth && productHealth ? "健康" : "降级",
             service = "ApiGateway",
             services = new
             {
-                userService = userHealth ? "healthy" : "unhealthy",
-                productService = productHealth ? "healthy" : "unhealthy"
+                userService = userHealth ? "健康" : "不健康",
+                productService = productHealth ? "健康" : "不健康"
             }
         });
     }

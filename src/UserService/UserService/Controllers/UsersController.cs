@@ -14,9 +14,9 @@ public class UsersController : ControllerBase
     // 注意：在实际应用中应使用依赖注入的服务层和数据库
     private static readonly List<User> Users = new()
     {
-        new User(1, "Alice", "alice@example.com"),
-        new User(2, "Bob", "bob@example.com"),
-        new User(3, "Charlie", "charlie@example.com")
+        new User(1, "张三", "alice@example.com"),
+        new User(2, "李四", "bob@example.com"),
+        new User(3, "王五", "charlie@example.com")
     };
 
     /// <summary>
